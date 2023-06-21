@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sales Market Survey</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css">
+
+
+
+</head>
+
+<body>
+    <h1>Sales Market Survey</h1>
+    <form id="submit-to-google-sheet">
+
+        <label for="name">Customer name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="streetAddress">Street address:</label>
+        <input type="text" id="streetAddress" name="streetAddress" required>
+
+        <label for="city">City:</label>
+        <select id="city" name="city" class="select2-dropdown">
+            <option value="">Select a City</option>
+            <option value="Burewala">Burewala</option>
+            <option value="Vehari">Vehari</option>
+            <option value="Karachi">Karachi</option>
+            <option value="Islamabad">Islamabad</option>
+            <option value="Lahore">Lahore</option>
+            <!-- Add more city options here -->
+        </select>
+
+        <label for="state">State:</label>
+        <select id="state" name="state">
+            <option value="">Choose State</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Sindh">Sindh</option>
+            <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
+            <option value="Balochistan">Balochistan</option>
+            <option value="Islamabad Capital Territory">Islamabad Capital Territory</option>
+            <option value="Gilgit-Baltistan (formerly known as the Northern Areas)">Gilgit-Baltistan (formerly known as
+                the Northern Areas)</option>
+            <option value="Azad Jammu and Kashmir">Azad Jammu and Kashmir</option>
+
+        </select>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required pattern="[+][0-9]{12}" placeholder="+92xxxxxxxxxx">
+
+        <label for="brandalreadybeingused">The brand already being used:</label>
+        <input type="text" id="brandalreadybeingused" name="The brand already being used" required>
+
+        <label for="ppp">Price per pack:</label>
+        <input type="text" id="ppp" name="Price per pack" required>
+
+        <label for="ppCTN">Price per CTN:</label>
+        <input type="text" id="ppCTN" name="Price per CTN" required>
+
+        <label for="PaymentMethod">Payment method:</label>
+        <select id="paymentMethod" name="Payment Method">
+            <option value="">Select a Payment Method</option>
+            <option value="Cash">Cash</option>
+            <option value="Bank Account">Bank Account</option>
+            <option value="Credit Card">Credit Card</option>
+        </select>
+
+        <label for="dailyConsumptionKg">Daily consumption kg:</label>
+        <input type="number" id="dailyConsumptionKg" name="Daily consumption kg" required pattern="[0-9]">
+
+        <label for="Remarks">Remarks:</label>
+        <input type="text" id="remarks" name="Remarks" required>
+
+
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxWJO_fbdqgQmod81O5m2lPy8ReIIGmqhHRCc9x3VJBBVPX8e7sm2cUnxi-JRJyOZoq/exec'
+        const form = document.forms['submit-to-google-sheet']
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => alert('Success!', response))
+                .catch(error => alert('Error!', error.message))
+        });
+
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2-dropdown').select2();
+        });
+    </script>
+    <!-- <script src="script.js"></script> -->
+</body>
+
+</html>
