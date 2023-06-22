@@ -65,8 +65,16 @@
         <label for="Remarks">Remarks:</label>
         <input type="text" id="remarks" name="Remarks" required>
 
+        <!-- Location fetching -->
+        <div class="location">
+            <label for="latitude"></label>
+            <input type="text" id="latitude" name="latitude" required readonly>
 
+            <label for="longitude"></label>
+            <input type="text" id="longitude" name="longitude" required readonly>
 
+            <button type="button" onclick="fetchLocation()">Get Location</button>
+        </div>
         <input type="submit" value="Submit">
     </form>
 
@@ -102,7 +110,7 @@
             }
         }
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw2stZCG20-egcwu1Ltyzs1kfshvbNgbJc8bFNJhdvGZ9r9hCxSlGFblzKWM52UBhcW/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz2d2ogbvL9Dw5uU1aDebOkG2pL-TYjfa12UxIMUypzbZv2hgJaVSR9QE4ts9S3RP_s/exec';
         const form = document.getElementById("submit-to-google-sheet");
 
         form.addEventListener('submit', e => {
@@ -112,6 +120,44 @@
                 .catch(error => alert('Error!', error.message));
         });
     </script>
+
+    <!-- Location fetching javascript -->
+    <script>
+        function fetchLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        }
+
+        function successCallback(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            document.getElementById('latitude').value = latitude;
+            document.getElementById('longitude').value = longitude;
+        }
+
+        function errorCallback(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Location permission denied. Please enable location services.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred while getting the location.");
+                    break;
+            }
+
+        }
+    </script>
+    <!-- End of Location fetching javascript -->
 
 </body>
 

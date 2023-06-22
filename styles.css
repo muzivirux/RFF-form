@@ -69,3 +69,21 @@ li.selected {
   border-radius: 5px;
   background: #f2f2f2;
 }
+
+.location {
+  display: flex;
+
+  width: 100%;
+}
+.location button {
+  width: 50rem;
+  margin: 1rem 0 1rem 0;
+  background-color: red;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  color: #fff;
+}
+.location input {
+  margin: 1rem 3rem 1rem 0;
+}

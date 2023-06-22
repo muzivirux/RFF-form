@@ -1,0 +1,42 @@
+<label for="latitude">Latitude:</label>
+<input type="text" id="latitude" name="latitude">
+
+<label for="longitude">Longitude:</label>
+<input type="text" id="longitude" name="longitude">
+
+<button type="button" onclick="fetchLocation()">Get Location</button>
+
+<script>
+    function fetchLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    }
+
+    function successCallback(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        document.getElementById('latitude').value = latitude;
+        document.getElementById('longitude').value = longitude;
+    }
+
+    function errorCallback(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                alert("Location permission denied. Please enable location services.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred while getting the location.");
+                break;
+        }
+    }
+</script>
