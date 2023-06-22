@@ -21,19 +21,8 @@
         <label for="streetAddress">Street address:</label>
         <input type="text" id="streetAddress" name="streetAddress" required>
 
-        <label for="city">City:</label>
-        <select id="city" name="City">
-            <option value="">Select a City</option>
-            <option value="Burewala">Burewala</option>
-            <option value="Vehari">Vehari</option>
-            <option value="Karachi">Karachi</option>
-            <option value="Islamabad">Islamabad</option>
-            <option value="Lahore">Lahore</option>
-            <!-- Add more city options here -->
-        </select>
-
         <label for="state">State:</label>
-        <select id="state" name="State">
+        <select id="state" name="State" onchange="populateCities()">
             <option value="">Choose State</option>
             <option value="Punjab">Punjab</option>
             <option value="Sindh">Sindh</option>
@@ -43,7 +32,11 @@
             <option value="Gilgit-Baltistan (formerly known as the Northern Areas)">Gilgit-Baltistan (formerly known as
                 the Northern Areas)</option>
             <option value="Azad Jammu and Kashmir">Azad Jammu and Kashmir</option>
+        </select>
 
+        <label for="city">City:</label>
+        <select id="city" name="City">
+            <option value="">Select a City</option>
         </select>
 
         <label for="phone">Phone:</label>
@@ -78,17 +71,46 @@
     </form>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw2stZCG20-egcwu1Ltyzs1kfshvbNgbJc8bFNJhdvGZ9r9hCxSlGFblzKWM52UBhcW/exec'
-        const form = document.forms['submit-to-google-sheet']
+        // City data based on selected state
+        const cityData = {
+            Punjab: ["Burewala", "Vehari", "Lahore"],
+            Sindh: ["Karachi"],
+            "Khyber Pakhtunkhwa": ["Peshawar", "Abbottabad"],
+            Balochistan: ["Quetta"],
+            "Islamabad Capital Territory": ["Islamabad"],
+            "Gilgit-Baltistan (formerly known as the Northern Areas)": ["Gilgit", "Skardu"],
+            "Azad Jammu and Kashmir": ["Muzaffarabad"]
+        };
+
+        function populateCities() {
+            const stateSelect = document.getElementById("state");
+            const citySelect = document.getElementById("city");
+            const selectedState = stateSelect.value;
+
+            // Clear existing options
+            citySelect.innerHTML = '<option value="">Select a City</option>';
+
+            // Populate with cities based on selected state
+            if (selectedState && cityData[selectedState]) {
+                const cities = cityData[selectedState];
+                for (const city of cities) {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.text = city;
+                    citySelect.appendChild(option);
+                }
+            }
+        }
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw2stZCG20-egcwu1Ltyzs1kfshvbNgbJc8bFNJhdvGZ9r9hCxSlGFblzKWM52UBhcW/exec';
+        const form = document.getElementById("submit-to-google-sheet");
 
         form.addEventListener('submit', e => {
-            e.preventDefault()
+            e.preventDefault();
             fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                 .then(response => alert('Success!', response))
-                .catch(error => alert('Error!', error.message))
-        })
-
-
+                .catch(error => alert('Error!', error.message));
+        });
     </script>
 
 </body>
