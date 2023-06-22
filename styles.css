@@ -69,9 +69,3 @@ li.selected {
   border-radius: 5px;
   background: #f2f2f2;
 }
-
-@media screen and (max-width: 550px) {
-  body {
-    background-color: lightgreen;
-  }
-}

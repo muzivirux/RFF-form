@@ -16,13 +16,13 @@
     <form id="submit-to-google-sheet">
 
         <label for="name">Customer name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="Customer Name" required>
 
         <label for="streetAddress">Street address:</label>
         <input type="text" id="streetAddress" name="streetAddress" required>
 
         <label for="city">City:</label>
-        <select id="city" name="city" class="select2-dropdown">
+        <select id="city" name="City">
             <option value="">Select a City</option>
             <option value="Burewala">Burewala</option>
             <option value="Vehari">Vehari</option>
@@ -33,7 +33,7 @@
         </select>
 
         <label for="state">State:</label>
-        <select id="state" name="state">
+        <select id="state" name="State">
             <option value="">Choose State</option>
             <option value="Punjab">Punjab</option>
             <option value="Sindh">Sindh</option>
@@ -47,7 +47,7 @@
         </select>
 
         <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required pattern="[+][0-9]{12}" placeholder="+92xxxxxxxxxx">
+        <input type="tel" id="phone" name="Phone" required pattern="[+][0-9]{12}" placeholder="+92xxxxxxxxxx">
 
         <label for="brandalreadybeingused">The brand already being used:</label>
         <input type="text" id="brandalreadybeingused" name="The brand already being used" required>
@@ -78,7 +78,7 @@
     </form>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxWJO_fbdqgQmod81O5m2lPy8ReIIGmqhHRCc9x3VJBBVPX8e7sm2cUnxi-JRJyOZoq/exec'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw2stZCG20-egcwu1Ltyzs1kfshvbNgbJc8bFNJhdvGZ9r9hCxSlGFblzKWM52UBhcW/exec'
         const form = document.forms['submit-to-google-sheet']
 
         form.addEventListener('submit', e => {
@@ -86,18 +86,11 @@
             fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                 .then(response => alert('Success!', response))
                 .catch(error => alert('Error!', error.message))
-        });
+        })
 
 
     </script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.select2-dropdown').select2();
-        });
-    </script> -->
-    <!-- <script src="script.js"></script> -->
+
 </body>
 
 </html>
