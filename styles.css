@@ -87,3 +87,21 @@ li.selected {
 .location input {
   margin: 1rem 3rem 1rem 0;
 }
+
+/* footer */
+.footer {
+  align-items: center;
+  text-align: center;
+  margin: 4rem 0 2rem 0;
+  color: #fff;
+}
+.footer a {
+  text-decoration: none;
+  color: #f3f1f1;
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: #222;
+}
+/* end of footer */
