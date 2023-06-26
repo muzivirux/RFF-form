@@ -15,7 +15,7 @@
     <h1>Sales Market Survey</h1>
     <form id="salesMarketSurvey">
 
-        <label for="name">Customer name:</label>
+        <label for=" name">Customer name:</label>
         <input type="text" id="name" name="Customer Name" required>
 
         <label for="streetAddress">Street address:</label>
@@ -459,10 +459,48 @@
                     break;
             }
 
-        }
+        };
+
+
     </script>
     <!-- End of Location fetching javascript -->
+    <!-- reseting form after submitting -->
+    <script>
+        document.getElementById('salesSampling').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
 
+            // Get the form values
+            var resetingForm = document.getElementById('name').value;
+            var email = document.getElementById('streetAddress').value;
+            var email = document.getElementById('state').value;
+            var email = document.getElementById('city').value;
+            var email = document.getElementById('phone').value;
+            var email = document.getElementById('Nearestlandmarks').value;
+            var email = document.getElementById('Shopname').value;
+            var email = document.getElementById('remarks').value;
+            var email = document.getElementById('followupdate').value;
+            var email = document.getElementById('latitude').value;
+            var email = document.getElementById('longitude').value;
+
+            // Perform any additional validation or processing here
+
+            // Send the form data to the server (you can use AJAX or other techniques)
+
+            // Reset the form fields
+            document.getElementById('name').value = '';
+            document.getElementById('streetAddress').value = '';
+            document.getElementById('state').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('Nearestlandmarks').value = '';
+            document.getElementById('Shopname').value = '';
+            document.getElementById('remarks').value = '';
+            document.getElementById('followupdate').value = '';
+            document.getElementById('latitude').value = '';
+            document.getElementById('longitude').value = '';
+        });
+    </script>
+    <!-- End of reseting form after submitting -->
 </body>
 
 </html>

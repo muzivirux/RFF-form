@@ -409,3 +409,54 @@ Sohbatpu
 "Rara",
 "Samani",
 "Sharda"
+
+<!-- Google sheet script -->
+
+var sheetName = 'SalesMarketSurvey';
+var scriptProp = PropertiesService.getScriptProperties();
+var recipientEmail = 'muzaffarrafiq1717@gmail.com'; // Specify the email address to which the notification should be sent
+
+function intialSetupSurvey() {
+var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+scriptProp.setProperty('key', activeSpreadsheet.getId());
+}
+
+function doPost(e) {
+var lock = LockService.getScriptLock();
+lock.tryLock(10000);
+
+try {
+var doc = SpreadsheetApp.openById(scriptProp.getProperty('key'));
+var sheet = doc.getSheetByName(sheetName);
+
+    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    var nextRow = sheet.getLastRow() + 1;
+
+    var newRow = headers.map(function(header) {
+      return header === 'timestamp' ? new Date() : e.parameter[header];
+    });
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow]);
+
+    // Send email notification
+    var subject = 'New row added in Google Sheets (Sales Market Survey)';
+    var message = 'A new row has been added in the sheet: ' + sheetName + '\n\n';
+    message += 'Row: ' + nextRow + '\n';
+    message += 'Column values: ' + newRow.join(', ');
+
+    MailApp.sendEmail(recipientEmail, subject, message);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+} catch (e) {
+return ContentService
+.createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+.setMimeType(ContentService.MimeType.JSON);
+} finally {
+lock.releaseLock();
+}
+}
+
+<!-- end of Google sheet script -->
