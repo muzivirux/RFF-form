@@ -13,7 +13,7 @@
 
 <body>
     <h1>Sales Market Survey</h1>
-    <form id="submit-to-google-sheet">
+    <form id="salesMarketSurvey">
 
         <label for="name">Customer name:</label>
         <input type="text" id="name" name="Customer Name" required>
@@ -414,8 +414,8 @@
             }
         }
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz2d2ogbvL9Dw5uU1aDebOkG2pL-TYjfa12UxIMUypzbZv2hgJaVSR9QE4ts9S3RP_s/exec';
-        const form = document.getElementById("submit-to-google-sheet");
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyMqEdt2PlKAYWvHxteOPeMimhYNvI1NxGfHudAUuPACyR1HYfwUmssUqBw2AqG-tx0/exec';
+        const form = document.getElementById("salesMarketSurvey");
 
         form.addEventListener('submit', e => {
             e.preventDefault();
