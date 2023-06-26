@@ -420,8 +420,14 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => alert('Success!', response))
-                .catch(error => alert('Error!', error.message));
+                .then(response => {
+                    hideSpinner(); // Hide the spinner
+                    alert('Success!', response)
+                })
+                .catch(error => {
+                    hideSpinner(); // Hide the spinner
+                    alert('Error!', error.message)
+                });
         });
     </script>
 
