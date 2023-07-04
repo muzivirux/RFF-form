@@ -105,3 +105,108 @@ li.selected {
   color: #222;
 }
 /* end of footer */
+
+/* Spinner */
+.spinner-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ffffff;
+  border-top-color: #007bff;
+  border-radius: 50%;
+  animation: spinner-rotation 1s linear infinite;
+}
+
+@keyframes spinner-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* end of Spinner */
+
+/* modal block pop up */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  /* transform: translateX(-50%); */
+  /* transform: translateY(-50%); */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  /* justify-content: space-around; */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40vw;
+  position: relative;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#closeBtn {
+  background-color: #4caf50;
+  position: absolute;
+  bottom: 1rem;
+  color: #fefefe;
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 1s;
+}
+#closeBtn:hover {
+  background-color: red;
+}
+#modal-message {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+/* end of modal block pop up */
+
