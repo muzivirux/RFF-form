@@ -7,7 +7,21 @@
     <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"> -->
 
+    <script>     // other hidden field
+        function handleBrandSelection() {
+            var selectElement = document.getElementById("brandalreadybeingused");
+            var otherBrandContainer = document.getElementById("otherBrandContainer");
+            var otherBrandInput = document.getElementById("otherBrand");
 
+            if (selectElement.value === "other") {
+                otherBrandContainer.style.display = "block";
+                otherBrandInput.required = true;
+            } else {
+                otherBrandContainer.style.display = "none";
+                otherBrandInput.required = false;
+            }
+        }
+    </script>
 
 </head>
 
@@ -43,24 +57,29 @@
         <input type="tel" id="phone" name="Phone" required pattern="[+][0-9]{12}" placeholder="+92xxxxxxxxxx">
 
         <label for="brandalreadybeingused">The brand already being used:</label>
-        <select id="brandalreadybeingused" name="The brand already being used">
+        <select id="brandalreadybeingused" name="The brand already being used" onchange="handleBrandSelection()">
             <option value="">Select a Brand you already used</option>
-            <option value="McDonald's">McDonald's</option>
-            <option value="KFC">KFC</option>
-            <option value="Burger King">Burger King</option>
-            <option value="Hardee's">Hardee's</option>
-            <option value="Johnny & Jugnu">Johnny & Jugnu</option>
-            <option value="Fatburger">Fatburger</option>
-            <option value="Burger Lab">Burger Lab</option>
-            <option value="OPTP (One Potato Two Potato)">OPTP (One Potato Two Potato)</option>
-            <option value="Potato Junction">Potato Junction</option>
-            <option value="Burger Hub">Burger Hub</option>
-            <option value="The Sauce Burger Café">The Sauce Burger Café</option>
-            <option value="The Loaded Fries Co.">The Loaded Fries Co.</option>
-            <option value="Mr. Crisp">Mr. Crisp</option>
-            <option value="French Express">French Express</option>
+            <option value="McCain">McCain</option>
             <option value="OPA fries">OPA fries</option>
+            <option value="Lamb Weston">Lamb Weston</option>
+            <option value="Mr. Crisp">Mr. Crisp</option>
+            <option value="Tater Tot">Tater Tot</option>
+            <option value="Purefoods">Purefoods</option>
+            <option value="Sabroso">Sabroso</option>
+            <option value="Harvest Fresh">Harvest Fresh</option>
+            <option value="Eurofoods">Eurofoods</option>
+            <option value="Al-Safa">Al-Safa</option>
+            <option value="Emborg">Emborg</option>
+            <option value="MonSalwa">MonSalwa</option>
+            <option value="Nefis Foods">Nefis Foods</option>
+            <option value="other">other</option>
         </select>
+        <!-- hidden other field -->
+        <div id="otherBrandContainer" style="display: none;">
+            <label for="otherBrand">Specify the other brand:</label>
+            <input type="text" id="otherBrand" name="Other brand" placeholder="Specify the other brand">
+        </div>
+        <!-- End of hidden other field -->
 
 
         <label for="ppp">Price per pack:</label>
@@ -484,6 +503,9 @@
             modalCloseBtn.addEventListener("click", () => {
                 modal.style.display = "none";
             });
+
+
+
         </script>
 
         <!-- Location fetching javascript -->
@@ -593,6 +615,10 @@
             // Add event listener to form submit
 
             form.addEventListener("submit", handleSubmit);
+
+
+
+
         </script>
 
         <!-- end of for reseting after submitting -->
