@@ -4,8 +4,6 @@
 <head>
     <title>Sales Market Survey</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"> -->
 
     <script>     // other hidden field
         function handleBrandSelection() {
@@ -26,12 +24,17 @@
 </head>
 
 <body>
+    <div class="logo">
+        <img id="logoImg" src="/images/rff.png">
+    </div>
+
     <h1>Sales Market Survey</h1>
+    <div id="line"></div>
     <form id="salesMarketSurvey">
 
         <label for=" name">Customer name:</label>
-        <input type="text" id="name" name="Customer Name" required>
-
+        <input type="text" class="input" id="name" name="Customer Name" required pattern="^[A-Za-z\s]+$"
+            placeholder="Customer Name">
         <label for="streetAddress">Street address:</label>
         <input type="text" id="streetAddress" name="streetAddress" required>
 
@@ -54,7 +57,7 @@
         </select>
 
         <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="Phone" required pattern="[+][0-9]{12}" placeholder="+92xxxxxxxxxx">
+        <input type="tel" id="phone" name="Phone" required pattern="\d+[+][0-9]{12}" placeholder="+92xxxxxxxxxx">
 
         <label for="brandalreadybeingused">The brand already being used:</label>
         <select id="brandalreadybeingused" name="The brand already being used" onchange="handleBrandSelection()">
@@ -122,6 +125,12 @@
 
     </form>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Copyright &copy; <a href="https://rafiqfarmfoods.com/" target="_blank"> Rafiq Farm Foods </a>| All Right
+            Reserved. </p>
+    </footer>
+    <!-- end of Footer -->
     <!-- spinner html -->
     <div class="spinner-container">
         <div class="spinner"></div>
@@ -136,15 +145,27 @@
             <button id="closeBtn">Close</button>
         </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Copyright &copy; <a href="https://rafiqfarmfoods.com/" target="_blank"> Rafiq Farm Foods </a>| All Right
-                Reserved. </p>
-        </footer>
-        <!-- end of Footer -->
+
 
         <!-- JavaScript -->
         <script>
+
+            // input field validation
+            // Get all input fields with the 'input' class
+            const inputFields = document.querySelectorAll('.input');
+
+            // Add event listeners to toggle the 'placeholder-shown' class
+            inputFields.forEach((input) => {
+                input.addEventListener('input', function () {
+                    if (this.value === '') {
+                        this.classList.add('placeholder-shown');
+                    } else {
+                        this.classList.remove('placeholder-shown');
+                    }
+                });
+            });
+
+
             // City data based on selected state
             const cityData = {
                 Punjab: ["Abdul Hakim",
