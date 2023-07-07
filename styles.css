@@ -328,4 +328,7 @@ li.selected {
   #line {
     width: 50%;
   }
+  .footer {
+    font-size: 70%;
+  }
 }
