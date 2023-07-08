@@ -763,62 +763,58 @@ Balochistan: ["Quetta",
 "Samani",
 "Sharda"
 
-                  // Get the form values
-                var resetingForm = document.getElementById('wapdapeak').value;
-                var email = document.getElementById('wapdaoffpeak').value;
-                var email = document.getElementById('wapdapeakend').value;
-                var email = document.getElementById('wapdaoffpeakend').value;
-                var email = document.getElementById('wapdatotalend').value;
-                var email = document.getElementById('wapdaused').value;
-                var email = document.getElementById('wapdaavailibility').value;
-                var email = document.getElementById('gen1Units').value;
-                var email = document.getElementById('gen1diesel').value;
-                var email = document.getElementById('gen1duration').value;
-                var email = document.getElementById('gen1Units').value;
-                var email = document.getElementById('gen1diesel').value;
-                var email = document.getElementById('gen1duration').value;
-                var email = document.getElementById('gen1used').value;
-                var email = document.getElementById('wapdatotal').value;
-                var email = document.getElementById('gen3Units').value;
-                var email = document.getElementById('gen3diesel').value;
-                var email = document.getElementById('gen3duration').value;
-                var email = document.getElementById('powerUseAgri').value;
-                var email = document.getElementById('runningLoad').value;
-                var email = document.getElementById('totalrunningtime').value;
-                var email = document.getElementById('Submersibleremarks').value;
-                var email = document.getElementById('productiontotalrunninghrs').value;
-                var email = document.getElementById('productionremarks').value;
-                var email = document.getElementById('ohpcf').value;
-                var email = document.getElementById('ohpcfremarks').value;
+                 
 
-                // Perform any additional validation or processing here
 
-                // Send the form data to the server (you can use AJAX or other techniques)
+                 function sendEmailAndMoveRow() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var recipientAddress = ss.getSheetByName('recipientAddress');
+  var notificationMessage = ss.getSheetByName('notificationMessage');
+   var sourceSheet1 = ss.getSheetByName('JMRefrigerationForm');
+  var sourceSheet2 = ss.getSheetByName('EnergyFuelConsumptionData');
+  var sourceSheet3 = ss.getSheetByName('JMsteamBoilerForm');
+  var sourceSheet4 = ss.getSheetByName('JMUtilityForm');
+  var backupSheet = ss.getSheetByName('MasterSheet');
 
-                // Reset the form fields
-                document.getElementById('wapdapeak').value = '';
-                document.getElementById('wapdaoffpeak').value = '';
-                document.getElementById('wapdapeakend').value = '';
-                document.getElementById('wapdaoffpeakend').value = '';
-                document.getElementById('wapdatotalend').value = '';
-                document.getElementById('wapdaused').value = '';
-                document.getElementById('wapdaavailibility').value = '';
-                document.getElementById('gen1Units').value = '';
-                document.getElementById('gen1diesel').value = '';
-                document.getElementById('gen1duration').value = '';
-                document.getElementById('gen1Units').value = '';
-                document.getElementById('gen1duration').value = '';
-                document.getElementById('gen1diesel').value = '';
-                document.getElementById('gen1used').value = '';
-                document.getElementById('wapdatotal').value = '';
-                document.getElementById('gen3Units').value = '';
-                document.getElementById('gen3diesel').value = '';
-                document.getElementById('gen3duration').value = '';
-                document.getElementById('powerUseAgri').value = '';
-                document.getElementById('runningLoad').value = '';
-                document.getElementById('totalrunningtime').value = '';
-                document.getElementById('Submersibleremarks').value = '';
-                document.getElementById('productiontotalrunninghrs').value = '';
-                document.getElementById('productionremarks').value = '';
-                document.getElementById('ohpcf').value = '';
-                document.getElementById('ohpcfremarks').value = '';
+  var subject = notificationMessage.getRange(2, 1).getValue();
+  var message = notificationMessage.getRange(2, 2).getValue();
+  var n = recipientAddress.getLastRow();
+
+  for (var i = 2; i <= n; i++) {
+    var emailAddress = recipientAddress.getRange(i, 1).getValue();
+    MailApp.sendEmail(emailAddress, subject, message);
+  }
+
+  var lastRow1 = sourceSheet1.getLastRow();
+  var lastRow2 = sourceSheet2.getLastRow();
+  var lastRow3 = sourceSheet3.getLastRow();
+  var lastRow4 = sourceSheet4.getLastRow();
+
+  var lastRowValues1 = sourceSheet1.getRange(lastRow1, 1, 1, sourceSheet1.getLastColumn()).getValues();
+  var lastRowValues2 = sourceSheet2.getRange(lastRow2, 1, 1, sourceSheet2.getLastColumn()).getValues();
+  var lastRowValues3 = sourceSheet3.getRange(lastRow3, 1, 1, sourceSheet3.getLastColumn()).getValues();
+  var lastRowValues4 = sourceSheet4.getRange(lastRow4, 1, 1, sourceSheet4.getLastColumn()).getValues();
+
+  var mergedValues = lastRowValues1.concat(lastRowValues2, lastRowValues3, lastRowValues4);
+
+  var destinationRow = getDestinationRow(backupSheet, mergedValues[0][0]);
+
+  backupSheet.insertRowBefore(destinationRow);
+  backupSheet.getRange(destinationRow, 1, 1, mergedValues[0].length).setValues(mergedValues);
+
+  sourceSheet1.deleteRow(lastRow1);
+  sourceSheet2.deleteRow(lastRow2);
+  sourceSheet3.deleteRow(lastRow3);
+  sourceSheet4.deleteRow(lastRow4);
+}
+
+function getDestinationRow(sheet, heading) {
+  var headings = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var headingIndex = headings.indexOf(heading);
+
+  if (headingIndex !== -1) {
+    return sheet.getLastRow() + 1;
+  }
+
+  return headings.filter(Boolean).length + 2;
+}
