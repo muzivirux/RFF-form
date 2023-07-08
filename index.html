@@ -148,6 +148,10 @@
             <button id="closeBtn">Close</button>
         </div>
 
+        <!-- page loader spinner -->
+        <div class="spinner-container">
+            <div class="spinner"></div>
+        </div>
 
 
         <!-- JavaScript -->
@@ -167,6 +171,17 @@
                     }
                 });
             });
+
+
+            // page loading spinner
+            document.addEventListener("DOMContentLoaded", function () {
+                var spinnerContainer = document.querySelector(".spinner-container");
+                spinnerContainer.style.display = "flex";
+                window.addEventListener("load", function () {
+                    spinnerContainer.style.display = "none";
+                });
+            });
+
 
 
             // City data based on selected state
