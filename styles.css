@@ -387,6 +387,6 @@ li.selected {
     margin-bottom: 10px;
   }
   body::before {
-    height: 50%; /* Adjust the height value as desired */
+    display: none;
   }
 }
