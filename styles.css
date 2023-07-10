@@ -339,6 +339,9 @@ spline-viewer {
   opacity: 0.3;
   animation: splineAnime 1s;
 }
+.spline-viewer-container {
+  pointer-events: none; /* Disable pointer events on the container */
+}
 
 @keyframes splineAnime {
   0% {
@@ -349,6 +352,9 @@ spline-viewer {
     transform: scale(1);
     opacity: 0.3;
   }
+}
+.spline-viewer-container .spline-viewer-wrapper {
+  pointer-events: auto; /* Enable pointer events on the viewer */
 }
 
 /* responsive */
