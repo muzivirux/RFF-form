@@ -49,7 +49,7 @@
         <input type="text" id="streetAddress" name="streetAddress" required>
 
         <label for="state">State:</label>
-        <select id="state" name="State" onchange="populateCities()">
+        <select id="state" name="State" onchange="populateCities()" required>
             <option value="">Choose State</option>
             <option value="Punjab">Punjab</option>
             <option value="Sindh">Sindh</option>
@@ -62,7 +62,7 @@
         </select>
 
         <label for="city">City:</label>
-        <select id="city" name="City">
+        <select id="city" name="City" required>
             <option value="">Select a City</option>
         </select>
 
@@ -70,7 +70,8 @@
         <input type="tel" id="phone" class="input" name="Phone" required pattern=\+\d+ placeholder="+92xxxxxxxxxx">
 
         <label for="brandalreadybeingused">The brand already being used:</label>
-        <select id="brandalreadybeingused" name="The brand already being used" onchange="handleBrandSelection()">
+        <select id="brandalreadybeingused" name="The brand already being used" onchange="handleBrandSelection()"
+            required>
             <option value="">Select a Brand you already used</option>
             <option value="McCain">McCain</option>
             <option value="OPA fries">OPA fries</option>
@@ -90,7 +91,7 @@
         <!-- hidden other field -->
         <div id="otherBrandContainer" style="display: none;">
             <label for="otherBrand">Specify the other brand:</label>
-            <input type="text" id="otherBrand" name="Other brand" placeholder="Specify the other brand">
+            <input type="text" id="otherBrand" name="Other brand" placeholder="Specify the other brand" required>
         </div>
         <!-- End of hidden other field -->
 
@@ -102,7 +103,7 @@
         <input type="number" id="ppCTN" name="Price per CTN" required min="0">
 
         <label for="PaymentMethod">Payment method:</label>
-        <select id="paymentMethod" name="Payment Method">
+        <select id="paymentMethod" name="Payment Method" required>
             <option value="">Select a Payment Method</option>
             <option value="Cash">Cash</option>
             <option value="Bank Account">Bank Account</option>
